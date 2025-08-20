@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      DB_HOST: localhost       # 로컬 MySQL 서버
+      DB_PORT: 3307            # MySQL 기본 포트
+      DB_USER: root            # MySQL 사용자 이름
+      DB_PASS: 1234        # MySQL 비밀번호
+      DB_NAME: plannie       # MySQL 데이터베이스 이름
+    network_mode: "host"  # EC2 네트워크 인터페이스를 사용
+
+  mongo:
+    image: mongo
+    ports:
+      - "27018:27017"
